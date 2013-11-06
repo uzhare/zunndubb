@@ -1,0 +1,8 @@
+<ul>
+    {% for group_user in group_users %}
+    <li>
+    <a href="{{ group_user.get_absolute_url }}">{{ group_user }}</a>
+    {% if not group_user.user.is_active %}Send reminder{% endif %}
+    </li>
+    {% endfor %}
+</ul>

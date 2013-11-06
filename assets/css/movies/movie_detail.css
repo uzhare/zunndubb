@@ -1,0 +1,53 @@
+/* line 5, ../../sass/movies/movie_detail.sass */
+#movie #info #wishlist_control {
+  margin-bottom: 20px;
+}
+/* line 7, ../../sass/movies/movie_detail.sass */
+#movie #info #title-switch {
+  font-variant: normal !important;
+}
+/* line 9, ../../sass/movies/movie_detail.sass */
+#movie #info #imdb_rating {
+  color: #f8980f;
+}
+/* line 12, ../../sass/movies/movie_detail.sass */
+#movie #info #rated a {
+  display: inline-block;
+  content: " ";
+  text-indent: -9999px;
+  width: 32px;
+  background: url(../../img/mpaarating.png) no-repeat;
+}
+/* line 18, ../../sass/movies/movie_detail.sass */
+#movie #info #rated a.MPAA_R {
+  background-position: -163px 0px;
+  width: 20px;
+}
+/* line 21, ../../sass/movies/movie_detail.sass */
+#movie #info #rated a.MPAA_APPROVED {
+  width: 72px;
+}
+/* line 23, ../../sass/movies/movie_detail.sass */
+#movie #info #rated a.MPAA_,
+#movie #info #rated a.MPAA_NOT_RATED {
+  background-position: -186px -18px;
+}
+/* line 27, ../../sass/movies/movie_detail.sass */
+#movie #torrents table {
+  display: none;
+}
+/* line 29, ../../sass/movies/movie_detail.sass */
+#movie #torrents a:hover {
+  text-decoration: none;
+}
+/* line 32, ../../sass/movies/movie_detail.sass */
+#movie #similars .similar {
+  margin-left: 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  height: 300px;
+}
+/* line 40, ../../sass/movies/movie_detail.sass */
+#movie #similars .similar #similars-detail .similar-detail .poster {
+  margin-right: 12px !important;
+}

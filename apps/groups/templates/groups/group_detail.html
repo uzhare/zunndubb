@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load url from future %}
+{% block main %}
+<h1>{{ group }}</h1>
+    <ul>
+        <li><a href="{% url "group_edit" group.pk %}">Edit</a></li>
+        <li><a href="{% url "group_delete" group.pk %}">Delete</a></li>
+        <li><a href="{% url "group_user_add" group.pk %}">Add a member</a></li>
+    </ul>
+    <a href="{% url "group_user_list" group.pk%}"><button class ="btn btn-warning">View Members</button></a>
+{% endblock %}
+

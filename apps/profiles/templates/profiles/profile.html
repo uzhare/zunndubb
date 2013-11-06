@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block title %} {{ profile.get_full_name }} {% endblock %}
+{% block breadcrumb_tail %}
+<li><a href="#">Members</a></a></li>
+{% endblock %}
+
+{% block main %}
+<div id="profile">
+<div class="row" id="topbox">
+    <div class="span2" id="avatar">
+        <img src="{{ MEDIA_URL }}{{ profile.avatar_medium }}">
+    </div>
+    <div class="span8" id="text">
+        <h1 id="name">{{ profile.name }}</h1>
+        <p>Currently downloading {{ profile.downloading_list.count }} movies,
+                    possesses {{ profile.has_list.count }},
+                    and wants {{ profile.want_list.count }}.
+                    </em></p>
+        <div class="">
+            <a class="btn btn-primary" href="#"><span class="icon-check"></span> Follow</a>
+            <a class="btn btn-primary " href="#">
+                <span class="icon-envelope"></span>
+                Message
+            </a>
+            <a class="btn btn-primary" href="#"><span class="icon-flag"></span> Report</a>
+        </div>
+    </div>
+</div>
+
+
+    <div class="row" id="rest">
+        <div class="span10">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#"><span class="icon-ok-sign"></span> Has</a></li>
+                <li><a href="#"><span class="icon-download-alt"></span> Downloading</a></li>
+                <li><a href="#"><span class="icon-heart"></span> Wants</a></li>
+                <li class="separator"></li>
+                <li class="pull-right"><a href="#"><span class="icon-group"></span> Groups</a></li>
+            </ul>
+            <h3>Has::</h3>
+            <div id="movies" class="row">
+                {% with profile.has_list  as has_list %}
+                    {% for wish in has_list %}
+                    <a href="{{ wish.movie.get_absolute_url }}" class="movie span2">
+                        <img src="{{ MEDIA_URL }}{{ wish.movie.poster_medium }}">
+                        <h4>{{ wish.movie }}</h4>
+                    </a>
+                    {% endfor %}
+                {% endwith %}
+            </div>
+            <hr/>
+            <h3>Wants::</h3>
+            <div id='want' class='row'>
+                {% with profile.want_list as want_list %}
+                    {% for wish in want_list %}
+                    <a href="{{ wish.movie.get_absolute_url }}" class="movie span2">
+                        <img src="{{ MEDIA_URL }}{{ wish.movie.poster_medium }}">
+                        <h4>{{ wish.movie }}</h4>
+                    </a>
+                    {% endfor %}
+                {% endwith %}
+            </div>
+            <hr/>
+            <h3>Downloading::</h3>
+            <div id='' class='row'>
+                {% with profile.downloading_list as downloading_list %}
+                    {% for wish in downloading_list %}
+                    <a href="{{ wish.movie.get_absolute_url }}" class="movie span2">
+                        <img src="{{ MEDIA_URL }}{{ wish.movie.poster_medium }}">
+                        <h4>{{ wish.movie }}</h4>
+                    </a>
+                    {% endfor %}
+                {% endwith %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block closure %}
+{{ block.super }}
+{% endblock %}
+{% block styles %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/profiles/profile.css">
+{% endblock %}

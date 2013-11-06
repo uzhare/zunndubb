@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block main %}
+<h3>Settings Page</h3>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.errors}}
+    <table>
+        <tr>
+            <td>
+                Username: {{form.username}}
+            </td>
+            <td>
+                Name: {{form.name}}
+            </td>    
+        </tr>
+        <tr>
+            <td>
+                Email: {{form.email}}
+            </td>
+            <td>
+                Profile Picture: {{form.avatar}}
+            </td>
+        </tr>   
+    </table>
+    <button type='submit' class='btn btn-primary'> Save </button>
+</form>
+{% endblock %}

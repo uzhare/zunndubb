@@ -1,0 +1,29 @@
+<div class="wishlist-btns">
+    <div class="btn-group" data-toggle="buttons-radio">
+        <button type="button"
+            title="Downloading"
+            data-url="/wishlist/wish/{{ movie.imdb_id }}/in_progress/"
+            class="btn-downloading btn btn-warning {{ btn_size }} {%if profile_is_downloading %}active{% endif %}">
+            <span class="icon-cloud-download"></span> Downloading
+        </button>
+        <button type="button"
+            title="Have it"
+            data-url="/wishlist/wish/{{ movie.imdb_id }}/have_it/"
+            class="btn-have btn btn-warning {{ btn_size }} {%if profile_has_it %}active{% endif %}">
+            <span class="icon-ok-sign"></span> Have It
+        </button>
+        <button type="button"
+            title="Want it!"
+            data-url="/wishlist/wish/{{ movie.imdb_id }}/want_it/"
+            class="btn-want btn btn-warning {{ btn_size }} {%if profile_wants_it %}active{% endif %}">
+            <span class="icon-heart"></span> Want It
+        </button>
+        <button type="button"
+            title="Don't Care"
+            data-url="/wishlist/wish/{{ movie.imdb_id }}/dont_care/"
+            class="btn-dontcare btn btn-warning {{ btn_size }} {%if profile_doesnt_care %}active{% endif %}">
+            <span class="icon-circle"></span> Don't Care
+        </button>
+    </div>
+    <div class="alert alert-success ajax-response" style="text-align:left; margin:12px 12px 12px 0;display:none;"><span class="icon-ok-sign"></span> Noted!</div>
+</div>

@@ -1,0 +1,9 @@
+/* line 2, ../../sass/profiles/profile.sass */
+#profile #topbox {
+  margin-bottom: 30px;
+}
+/* line 6, ../../sass/profiles/profile.sass */
+#profile #rest #movies .movie {
+  margin-bottom: 30px;
+  height: 300px;
+}

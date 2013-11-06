@@ -1,0 +1,16 @@
+{% for torrent in torrents %}
+<tr>
+    <td>
+        <div><a href="{{ torrent.magnet }}"><span class="icon-download"></span> {{ torrent.name }}</a></div>
+        <div>
+            <span class="size"> <span class="icon-hdd"></span> {{ torrent.size }}</span> &nbsp;
+        </div>
+    </td>
+    <td>{{ torrent.size }}</td>
+    <td>{{ torrent.seeders }}</td>
+    <td>{{ torrent.leechers }}</td>
+</tr>
+{% empty %}
+0
+{% endfor %}
+

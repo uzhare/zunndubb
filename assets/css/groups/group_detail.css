@@ -1,0 +1,23 @@
+/* line 3, ../../sass/groups/group_detail.sass */
+#group #messages .message {
+  margin-bottom: 12px;
+  border-top: 1px solid #c4c4c4;
+}
+/* line 6, ../../sass/groups/group_detail.sass */
+#group #messages .message p {
+  margin-top: 6px;
+}
+/* line 9, ../../sass/groups/group_detail.sass */
+#group #messages .message .profile .avatar {
+  margin-right: 10px;
+  float: left;
+}
+/* line 12, ../../sass/groups/group_detail.sass */
+#group #messages .message .profile .text {
+  width: 200px;
+  float: left;
+}
+/* line 15, ../../sass/groups/group_detail.sass */
+#group #messages .message .action-object {
+  text-align: center;
+}

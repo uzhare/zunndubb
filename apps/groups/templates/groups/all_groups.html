@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block main %}
+<h1> All Groups </h1>
+    <ul>
+        {% for group in groups %}
+        <li><a href="{{ group.get_absolute_url }}">{{ group }}</a></li>
+        <a href="{% url 'group_join' group.pk %}">
+            <button type="submit" class="btn btn-warning offset2"> Join Group</button>
+        </a>
+        <hr/>
+        {% endfor %}
+    </ul>
+{% endblock %}

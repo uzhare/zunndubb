@@ -1,0 +1,191 @@
+{% extends 'base.html' %}
+{% load movietags %}
+{% block title %} {{ movie.title }} ({{ movie.year }}) {% endblock %}
+{% block breadcrumb_tail %}
+<li><a href="{% url "movie_list" %}"><span class="icon-film"></span> Movies</a> <span class="divider">&rarr;</span> </li>
+<li>{{ movie }}<li>
+{% endblock %}
+{% block main %}
+<div id="movie">
+    <div class="row">
+        <div class="span2" id="sidebar">
+            <div id="poster"><img id="poster" src="{{ MEDIA_URL }}{{ movie.poster_medium }}"></div>
+            <h4>Has ({{ movie.who_has.count }})</h4>
+            <div id="dhw" class="row">
+                {% for wish in movie.who_has %}
+                <a class="span1" href="#">
+                    <img src="{{ MEDIA_URL }}{{ wish.profile.avatar_mini }}" title="{{ wish.profile.name }}" alt="{{ wish.profile.name }}">
+                </a>
+                {% endfor %}
+            </div>
+            <h4>Downloading ({{ movie.who_is_downloading.count }})</h4>
+            <div id="dhw" class="row">
+                {% for wish in movie.who_is_downloading %}
+                <a class="span1" href="#">
+                    <img src="{{ MEDIA_URL }}{{ wish.profile.avatar_mini }}" title="{{ wish.profile.name }}" alt="{{ wish.profile.name }}">
+                </a>
+                {% endfor %}
+            </div>
+            <h4>Want ({{ movie.who_wants.count }})</h4>
+            <div id="dhw" class="row">
+                {% for wish in movie.who_wants %}
+                <a class="span1" href="#">
+                    <img src="{{ MEDIA_URL }}{{ wish.profile.avatar_mini }}" title="{{ wish.profile.name }}" alt="{{ wish.profile.name }}">
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+        <div id="info" class="span8">
+            <h1>
+                {{ movie }}
+                {% if user.is_staff %}
+                {% endif %}
+            </h1>
+            <div id="gnere">
+                <ul class="inline">
+                    <li id="imdb_rating" data-rating="{{ movie.rating }}"><span class="icon-star"></span>{{ movie.rating }}<li>
+                    <li class="separator"><li>
+                    <li class="separator"><li>
+                            <li id="rated" ><a class="MPAA_{{ movie.rated }} "href="/coming_soon/movies/rated:{{ movie.rated }}">&nbsp;</a><li>
+                    <li class="separator"><li>
+                {% for genre in movie.genres %}
+                    <li><a href="/commingsoon/movies/genre:{{ genre }}">{{ genre }}</a></li>
+                {% endfor %}
+                </ul>
+            </div>
+            <div id="wishlist_control">
+            {% with 'btn-small' as btn_size %}
+            {% include 'movies/partials/wishlist_control.html' %}
+            {% endwith %}
+            </div>
+            <ul id="movie-tabs" class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#plot">Plot</a><li>
+                <li><a data-toggle="tab" href="#cast">Cast</a><li>
+                <li><a data-toggle="tab" href="#directors">Directors</a><li>
+                <li><a data-toggle="tab" href="#alt_titles">Alternate Titles</a><li>
+            </ul>
+            <div class="tab-content">
+                <div id="plot" class="tab-pane fade in active">{{ movie.plot }}</div>
+                <div id="cast" class="tab-pane fade in">
+                    <ul id ="cast" class="unstyled">
+                        {% for actor in movie.actors %}
+                        <li>{{ actor }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div id="directors" class="tab-pane fade in">
+                    <ul class="unstyled">
+                    {% for director in movie.directors %}
+                        <li>{{ director }}</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+                <div id="alt_titles" class="tab-pane fade in">
+                    <ul class="unstyled">
+                    {% for title in movie.alt_titles %}
+                    <li>{{ title }} <button class="btn btn-warning btn-mini">Use this as main title</button></li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div id="torrents">
+                <h3>Downloads</h3>
+                <div id="zero-downloads" style="display:none;">
+                    <em>Could not find any downloads,</em>
+                </div>
+                <div id="alt-title-downloads" style="display:none;">
+                    <em>Search by other titles.</em>
+                    <ul class="read">
+                        <li><a class="alt_title" href="/movies/get_torrents/{{ movie.title|urlencode }}/">{{ movie.title }}</a> </li>
+                        {% for title in movie.alt_titles %}
+                        <li><a class="alt_title" href="/movies/get_torrents/{{ title|urlencode }}/">{{ title }}</a> </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div id="spinner"><span class="icon-spinner icon-spin"> </span> Searching...</div>
+                <table class="table table-hover table-striped table-condenced">
+                    <thead>
+                        <tr class="warning">
+                            <th width="70%">
+                                 Available downloads &nbsp; &nbsp;
+                            </th>
+                            <th>Size</th>
+                            <th>Seeders</th>
+                            <th>Leechers</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div id="similars">
+                <h3>Similar</h3>
+                <div class="row">
+                    <div class="span8">
+                        <div class="row">
+                            {% for similar in  movie.similar %}
+                            <a href="{{ similar.get_absolute_url }}" class="similar span2 ">
+                                <img src="{{ MEDIA_URL }}{{ similar.poster_medium }}">
+                                <h4 class="">{{ similar }}</h4>
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <!--<div class="span4" id="similars-detail">-->
+                        <!--{% for similar in  movie.similar %}-->
+                        <!--<div data-href="{{ similar.get_absolute_url }}" class="similar-detail clearfix" style="display:;">-->
+                            <!--<img class="poster thumbnail pull-left" src="{{ MEDIA_URL }}{{ similar.poster_mini }}">-->
+                            <!--<h4 class="pull-">{{ movie }}</h4>-->
+                            <!--<p class="clearfix">-->
+                                <!--{{ movie.plot|truncatewords:15 }}-->
+                            <!--</p>-->
+                        <!--</div>-->
+                        <!--{% endfor %}-->
+                        <!--asdasd-->
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block closure %}
+    {{ block.super }}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-button.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-tab.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-dropdown.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.tablesorter.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/wishlist.js"></script>
+    <script>
+        function fetch_torrents(url='/movies/get_torrents/{{ movie.title|urlencode }}/') {
+            $('#torrents #zero-downloads').hide('fast');
+            $('#torrents #spinner').show('fast');
+            $.get(
+                url, {},
+                function(response){
+                    if (response.trim() == '0') {
+                        $('#torrents #zero-downloads').show('fast');
+                    } else {
+                        $('#torrents table tbody').html(response);
+                        $('#torrents table').slideDown();
+                    }
+                    $('#torrents #spinner').hide('fast');
+                    $('#torrents #alt-title-downloads').show('fast');
+                }
+            );
+            return false;
+        }
+        $(function(){
+            $('#torrents table').tablesorter();
+            fetch_torrents();
+            $('#torrents .alt_title').on('click', function(e){
+                e.preventDefault();
+                return fetch_torrents($(this).attr('href'));
+            });
+        });
+    </script>
+{% endblock %}
+{% block styles %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/movies/movie_detail.css">
+{% endblock %}

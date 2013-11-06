@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block main %}
+<h1> Join Groups </h1>
+        <form action='.' method="post">{% csrf_token %}
+            {{form}}
+            <a href="{% url 'group_join' group.pk %}">
+                <button type="submit" class="btn btn-warning offset2"> Join Group</button>
+            </a>
+        <form>
+{% endblock %}

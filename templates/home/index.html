@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %} Zunndubb {% endblock %}
+{% block main %}
+{% if not user.is_authenticated %}
+    {% include 'home/index-anonymous.html' %}
+{% endif %}
+{% endblock %}
+{% block styles %}
+    {{ block.super }}
+{% endblock %}
+{% block closure %}
+{{ block.super }}
+<script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-carousel.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/holder.js"></script>
+<script type="text/javascript">
+    $('#leader-carousel').carousel()
+</script>
+{% endblock %}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title> {% block title %} {% endblock %} &nbsp; &laquo;&laquo; Zunndubb</title>
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/styles.css">
+{% endblock %}
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,700,600italic,700italic,800,800italic' rel='stylesheet' type='text/css'>
+{% block scripts %} {% endblock %}
+</head>
+<body>
+{% if user.is_authenticated %}
+    <div id="topnav" class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="brand" href="{% if user.is_authenticated %}{% url 'dash' %}{% else %}/{% endif %}">ZunnDubb<small>&mdash;now, who's got that movie?</small></a>
+            <ul class="nav">
+                <li><a href="{% url "movie_list" %}"><span class="icon-th"></span> Feed</a></li>
+                <li><a href="{% url "movie_list" %}"><span class="icon-film"></span> Movies</a></li>
+                <li><a href="{% url "group_list" %}"><span class="icon-group"></span> Groups</a></li>
+            </ul>
+            <ul class="nav pull-right">
+                <li><a href="{% url "profile" user.username %}"><span class="icon-user"></span> Profile</a></li>
+                <li><a href="{% url "settings" user.username %}"><span class="icon-cogs"></span> Settings</a></li>
+                <li><a href="/logout/"><span class="icon-remove-sign"></span> Logout</a></li>
+
+            </ul>
+            </div>
+        </div>
+    </div>
+{% endif %}
+    <div id="wrapper" class="container">
+        {% comment %}
+        <ul class="breadcrumb">
+            <li><a href="/"><span class="icon-home"> </span></a><span class="divider">&rarr;</span></li>
+            {% block breadcrumb_tail %}
+            {% endblock %}
+        </ul>
+        {% endcomment %}
+        <div class="row">
+            <div class="span10" id="globalmain">
+            {% block main %}
+            {% endblock %}
+            </div>
+            <div class="span2" id="globalsidebar">
+            {% if user.is_authenticated %}
+                <!--<div class="well" style="max-width: 340px; padding: 8px 0;">-->
+                <div >
+                <ul class="nav nav-list">
+                    <li><a href="/">
+                        <div class="clearfix" id="avatar">
+                            <span class="pull-left">{{ user.name }}</span>
+                            <img width="24px" class="pull-right" src="{{ MEDIA_URL }}{{ user.avatar_mini }}">
+                        </div>
+                    </a></li>
+                    <li class="divider"></li>
+                    <li class="nav-header"><i class="icon-film"></i> My Movies</li>
+                    <li><a href="#"><i class="icon-download-alt"></i> Downloading</a></li>
+                    <li><a href="#"><i class="icon-ok-sign"></i>Have</a></li>
+                    <li><a href="#"><i class="icon-heart"></i>Want</a></li>
+                    <li class="divider"></li>
+                    <li class="nav-header"><i class="icon-group"></i> My Groups</li>
+                    <li><a href="#"><i class=""></i> Movie Club</a></li>
+                    <li><a href="#"><i class=""></i>Hollywood Heros</a></li>
+                    <li><a href="#"><i class=""></i>Bollywood Badshahs</a></li>
+                </ul>
+                </div>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+{% block closure %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.js" ></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-tooltip.js" ></script>
+{% endblock %}
+</body>
+</html>
+

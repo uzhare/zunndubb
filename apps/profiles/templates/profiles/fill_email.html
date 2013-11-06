@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block main %}
+<div id='email'>
+    <div class='row'>
+        <div class='span6 offset2'>
+            <legend> Email address must be provided.</legend>
+            <hr/>
+            <form method='POST'>
+                {% csrf_token %}
+                {{form}}
+                <button type="submit" class='btn btn-primary offset1'>Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

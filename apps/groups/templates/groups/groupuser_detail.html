@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load url from future %}
+{% block main %}
+<h1> {{ group_user.user }} @ {{ group }}</h1>
+{% if user == group_user.user %}This is you!{% endif %}
+<ul>
+    <li>Name: {{ group_user.user.name }}</li>
+    <li>Email: {{ group_user.user.email }}</li>
+</ul>
+<ul>
+    <li><a href="{% url "group_user_edit" group.pk group_user.user.pk %}">Edit</a></li>
+    <li><a href="{% url "group_user_delete" group.pk group_user.user.pk %}">Delete</a></li>
+</ul>
+<a href="#">
+    <button class="btn btn-warning"> Go to {{group_user.name}}'s Profile </button>
+</a>
+{% endblock %}

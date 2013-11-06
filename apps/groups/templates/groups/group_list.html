@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block main %}
+
+{% if groups%}
+	<h1>My Groups</h1>
+{% else %}
+	<h1> You don't have any groups Yet!</h1>
+{% endif %}
+
+<ul>
+    {% for group in groups %}
+    <li><a href="{{ group.get_absolute_url }}">{{ group }}</a></li>
+    {% endfor %}
+</ul>
+<a href="{% url "group_add"%}"><button class="btn btn-warning"> Create Group </button></a>
+<a href="{% url "group_list_all"%}"><button class="btn btn-primary"> View All Groups </button></a>
+{% endblock %}

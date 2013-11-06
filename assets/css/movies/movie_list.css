@@ -1,0 +1,25 @@
+/* line 1, ../../sass/movies/movie_list.sass */
+#movie-list {
+  padding: 0;
+}
+/* line 3, ../../sass/movies/movie_list.sass */
+#movie-list .movie {
+  margin-bottom: 20px;
+  margin-left: 20px;
+  height: 300px;
+  text-align: center;
+}
+/* line 8, ../../sass/movies/movie_list.sass */
+#movie-list .movie a {
+  text-decoration: none;
+}
+/* line 10, ../../sass/movies/movie_list.sass */
+#movie-list .movie:hover {
+  background: whitesmoke;
+}
+/* line 14, ../../sass/movies/movie_list.sass */
+#movie-list .movie .wishlist-control {
+  position: relative;
+  top: 0;
+  right: 0;
+}

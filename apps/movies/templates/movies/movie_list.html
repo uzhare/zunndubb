@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load paginator %}
+pa
+{% block title %}Movies{% endblock %}
+{% block breadcrumb_tail %}
+<li><a href="{% url "movie_list" %}"><span class="icon-film"></span> Movies</a></li>
+{% endblock %}
+{% block main %}
+<div id="movie-list" class="row clearfix">
+{% if movie_list %}
+    {% for movie in movie_list %}
+    <div class="movie thumbnail span2">
+        <a href="{{ movie.get_absolute_url }}">
+        <img class="poster" src="{{ MEDIA_URL }}{{ movie.poster_medium }}">
+        <h4 class="title">{{ movie.title }} ({{ movie.year }})</h4>
+        </a>
+        {% with 'btn-small' as btn_size %}
+        <div class="wishlist-control" style="display:none;">
+            {% include 'movies/partials/wishlist_control.html' %}
+        </div>
+        {% endwith %}
+    </div>
+    {% endfor %}
+{% else %}
+<em>Nothing here yet</em>
+{% endif %}
+</div>
+{% paginate page_obj %}
+{% endblock %}
+{% block closure %}
+    {{ block.super }}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/wishlist.js"></script>
+    <script>
+    $(function(){
+        $('.movie').mouseover(function(){
+           $(this).children('.wishlist-control').show();
+        });
+        $('.movie').mouseout(function(){
+           $(this).children('.wishlist-control').hide();
+        });
+    });
+    </script>
+{% endblock %}
+{% block styles %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/movies/movie_list.css">
+{% endblock %}

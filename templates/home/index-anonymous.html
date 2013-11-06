@@ -1,0 +1,25 @@
+<style>
+    body{background: url(/static/img/kindajean.png) !important;} 
+    #wrapper { background: transparent !important}
+</style>
+
+
+<!--<h1><em>ZunnDubb</em> <small><br>login with your favorite social identity&hellip;</small></h1>-->
+<h1><em>ZunnDubb</em></h1>
+<div class="login-btns">
+
+<a href="{% url 'social:begin' 'facebook' %}" class="btn btn-large btn-primary">
+    <span class="icon-facebook-sign"></span>&nbsp;
+    Login with Facebook
+</a>
+
+<a href="{% url 'social:begin' 'twitter' %}" class="btn btn-large btn-primary">
+    <span class="icon-twitter-sign"></span>&nbsp;
+    Login with Twitter
+</a>
+
+<a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-large btn-primary">
+    <span class="icon-google-plus-sign"></span>&nbsp;
+    Login with Google
+</a>
+<pre>
