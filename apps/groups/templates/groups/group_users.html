@@ -1,8 +1,14 @@
-<ul>
+<div class="span8">
+    <ol>
     {% for group_user in group_users %}
     <li>
-    <a href="{{ group_user.get_absolute_url }}">{{ group_user }}</a>
-    {% if not group_user.user.is_active %}Send reminder{% endif %}
+        <a href="{% url "profile" group_user.user.username %}">
+            <img width="24px" src="{{ MEDIA_URL }}{{ group_user.user.avatar_mini }}">
+            {{ group_user }}
+        </a>
+        {% if not group_user.user.is_active %}Send reminder{% endif %}
     </li>
+
     {% endfor %}
-</ul>
+    </ol>
+</div>

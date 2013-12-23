@@ -2,13 +2,13 @@ from .models import (Group, GroupUser,
                     GroupOwner)
 
 
-def create_group(user, name, slug, is_active=True):
+def create_group(user, name, description, slug, is_active=True):
     """
     Returns a new group, also creating an initial group user who
     is the owner.
     """
-    group = Group.objects.create(name=name, slug=slug,
-            is_active=is_active)
+    group = Group.objects.create(name=name, description=description,
+            slug=slug, is_active=is_active)
     new_user = GroupUser.objects.create(group=group,
             user=user, is_admin=True)
     GroupOwner.objects.create(group=group,

@@ -7,3 +7,11 @@ register = template.Library()
 def group_users(context, group):
     context.update({'group_users': group.group_users.all()})
     return context
+
+@register.filter
+def get_is_admin(group, user):
+	return group.is_admin(user)
+
+@register.filter
+def get_is_member(group, user):
+	return group.is_member(user)

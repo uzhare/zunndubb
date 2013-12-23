@@ -33,6 +33,7 @@ class Group(models.Model):
     """
     name = models.CharField(max_length=256,
             help_text=_("The name of the group"))
+    description = models.TextField(help_text=_("About the group"))
     slug = models.SlugField(max_length=256, blank=False, unique=True,
             help_text=_("The name in all lowercase, suitable for URL identification"))
     users = models.ManyToManyField(USER_MODEL, through="GroupUser")

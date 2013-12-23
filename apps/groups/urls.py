@@ -4,9 +4,9 @@ from django.contrib.auth.decorators import login_required
 
 
 urlpatterns = patterns('',
-    url(r'^$', view=login_required(GroupListView.as_view()),
+    url(r'^mygroups/$', view=login_required(GroupListView.as_view()),
         name="group_list"),
-    url(r'^all/$', view=login_required(AllGroupListView.as_view()),
+    url(r'^$', view=login_required(AllGroupListView.as_view()),
         name="group_list_all"),
     url(r'^(?P<group_pk>[\d]+)/join/$', view=login_required(GroupJoinView.as_view()),
         name="group_join"),

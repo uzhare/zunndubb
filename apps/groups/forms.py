@@ -129,4 +129,5 @@ class GroupAddForm(forms.ModelForm):
         user = Profile.objects.get(username=self.request.user)
 
         return create_group(user, self.cleaned_data['name'],
+                self.cleaned_data['description'],
                 self.cleaned_data['slug'], is_active=is_active)

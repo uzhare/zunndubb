@@ -1,12 +1,50 @@
 {% extends "base.html" %}
 {% load url from future %}
+{% load group_tags %}
 {% block main %}
-<h1>{{ group }}</h1>
-    <ul>
-        <li><a href="{% url "group_edit" group.pk %}">Edit</a></li>
-        <li><a href="{% url "group_delete" group.pk %}">Delete</a></li>
-        <li><a href="{% url "group_user_add" group.pk %}">Add a member</a></li>
-    </ul>
-    <a href="{% url "group_user_list" group.pk%}"><button class ="btn btn-warning">View Members</button></a>
+<div class="heading">
+    <h1>{{ group }}</h1>
+</div>
+<div class="row">
+    <div class="span8">
+        {{group.description}}
+    </div>
+    <div class="span8 offset5">
+        {% if group|get_is_member:user %}
+                <a href="{% url "group_user_add" group.pk %}">
+                    <button type="submit "class="btn btn-warning">Add Member</button>
+                </a>
+                <a href="{% url "group_user_delete" group.pk user.id%}">
+                    <button type="submit "class="btn btn-danger">Leave Group</button>
+                </a>
+                {% if group|get_is_admin:user %}
+            <!--  TODO:Only for Admin-->
+                    <a href="{% url "group_edit" group.pk %}">
+                        <button type="submit "class="btn btn-warning">
+                            Edit Group
+                        </button>
+                    </a>
+                    <a href="{% url "group_delete" group.pk %}">
+                        <button type="submit "class="btn btn-danger">Delete Group</button>
+                    </a>
+                {% endif %}
+            {% else %}
+                <a href="{% url 'group_user_list' group.pk %}">
+                    <button type="submit" class="btn btn-warning">View Members
+                    </button>
+                </a>
+                <a href="{% url 'group_join' group.pk %}">
+                    <button type="submit" class="btn btn-warning">Join Group</button>
+                </a>
+
+            {% endif %}
+        </div>
+</div>
+<div class="row">
+    <div class="span8">
+        <legend>Group Members</legend>
+        {% group_users group %}
+    </div>
+</div>
 {% endblock %}
 
