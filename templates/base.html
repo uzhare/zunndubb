@@ -61,9 +61,10 @@
                     <li><a href="#"><i class="icon-heart"></i>Want</a></li>
                     <li class="divider"></li>
                     <li class="nav-header"><i class="icon-group"></i> My Groups</li>
-                    <li><a href="#"><i class=""></i> Movie Club</a></li>
-                    <li><a href="#"><i class=""></i>Hollywood Heros</a></li>
-                    <li><a href="#"><i class=""></i>Bollywood Badshahs</a></li>
+                    {% for group in my_groups %}
+                        <li><a href="{{ group.get_absolute_url }}">
+                            <i class=""></i>{{ group.name }}</a></li>
+                    {% endfor %}
                 </ul>
                 </div>
             {% endif %}

@@ -48,11 +48,12 @@ TEMPLATE_CONTEXT_PROCESSORS += (
     'django.core.context_processors.request',
     'social.apps.django_app.context_processors.backends',
     'social.apps.django_app.context_processors.login_redirect',
+    'apps.groups.context_processors.get_user_groups',
 )
 
 
 SOCIAL_AUTH_LOGIN_URL = '/'
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/' 
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/groups' 
 
 SOCIAL_AUTH_TWITTER_KEY = 'd1tWTQEr1P7vYx31HWIQ'
 SOCIAL_AUTH_TWITTER_SECRET = 'FQIAgQRJav8OUS89TqWQk6DcqZNUKHdzxWmsjAknYg'
